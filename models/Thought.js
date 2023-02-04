@@ -1,7 +1,5 @@
 const { Schema, model } = require("mongoose");
 
-const moment = require("moment");
-
 const reactionSchema = require("./Reaction")
 
 const thoughSchema = new Schema(
@@ -27,7 +25,7 @@ const thoughSchema = new Schema(
         toJSON: {
             virtuals: true,
         },
-        id: false,
+        id: false
     }
 );
 
