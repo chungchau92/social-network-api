@@ -1,4 +1,7 @@
 const { Schema, model } = require("mongoose");
+
+const moment = require("moment");
+
 const reactionSchema = require("./Reaction")
 
 const thoughSchema = new Schema(
@@ -11,7 +14,7 @@ const thoughSchema = new Schema(
         },
         createAt: {
             type: Date,
-            default: Date.now()
+            default: Date.now,
         },
         username: {
             type: String,
@@ -20,11 +23,11 @@ const thoughSchema = new Schema(
         reactions: [reactionSchema],
     },
     {
-        timestamps: true,
+        
         toJSON: {
-            getters: true,
             virtuals: true,
         },
+        id: false,
     }
 );
 

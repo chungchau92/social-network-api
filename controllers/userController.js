@@ -54,5 +54,33 @@ module.exports = {
         })
         .catch((err) => res.status(500).json(err))
 
+    },
+    // add a new friend to user's friend list
+    addFriend(req,res) {
+        User.findOneAndUpdate(
+            {_id: req.params.userId},
+            { $push: { friends: req.params.friendId }},
+            { new: true},
+        )
+        .then((friend) => {
+            !friend
+                ? res.status(404).json({ message: "no data with this id"})
+                : res.json(friend)
+        })
+        .catch((err) => res.status(500).json(err))
+    },
+    //  delete a friend from user's friend list
+    deleteFriend(req,res) {
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $pull: { friends: req.params.friendId }},
+            { new: true },
+        )
+        .then((friend) => {
+            !friend
+                ? res.status(404).json({ message: "no data with this id"})
+                : res.json(friend)
+        })
+        .catch((err) => res.status(500).json(err))
     }
 }
