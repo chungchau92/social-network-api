@@ -19,6 +19,9 @@ const thoughSchema = new Schema(
             required: true,
         },
         reactions: [reactionSchema],
+        userId: {
+            type: Schema.Types.ObjectId
+        }
     },
     {
         

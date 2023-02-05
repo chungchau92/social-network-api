@@ -30,13 +30,15 @@ module.exports = {
 
     // delete user
     deleteUser(req,res) {
+        
         User.findOneAndDelete({_id: req.params.userId})
-        .then((user) => {
+        .then( async (user) => {
             !user
                 ? res.status(404).json({ message: "No user with this id" })
-                : Thought.deleteMany({ _id: { $in: user.thoughts}})
+                : await Thought.deleteMany({ userId: { $in: user._id } })
         })
-        .then(() => res.json({ message: "User and thoughts deleted"}))
+        .then((data) => res.json(data))
+        // .then(() => res.json({ message: 'User and associated Thoughts deleted!' }))
         .catch ((err) => res.status(500).json(err))
     },
 
